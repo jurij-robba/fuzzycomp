@@ -5,6 +5,8 @@ authors = ["Juroj Robba <jurij.robba@vernocte.org>"]
 edition = "2018"
 license = "MIT"
 keywords = ["fuzzy", "comp"]
+categories = ["mathematics", "no-std", "science"]
+
 
 [dependencies]
 
