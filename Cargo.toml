@@ -6,6 +6,7 @@ edition = "2018"
 license = "MIT"
 keywords = ["fuzzy", "comp"]
 categories = ["mathematics", "no-std", "science"]
+description = "Comparison with margins"
 
 
 [dependencies]
