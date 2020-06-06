@@ -1,7 +1,7 @@
 [package]
 name = "fuzzycomp"
 version = "0.2.0"
-authors = ["Juroj Robba <jurij.robba@vernocte.org>"]
+authors = ["Jurij Robba <jurij.robba@vernocte.org>"]
 edition = "2018"
 license = "MIT"
 keywords = ["fuzzy", "comp"]
