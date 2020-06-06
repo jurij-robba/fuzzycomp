@@ -7,6 +7,9 @@ license = "MIT"
 keywords = ["fuzzy", "comp"]
 categories = ["mathematics", "no-std", "science"]
 description = "Comparison with margins"
+homepage = "https://github.com/jurij-robba/fuzzycomp"
+repository = "https://github.com/jurij-robba/fuzzycomp"
+readme = "README.md"
 
 
 [dependencies]
