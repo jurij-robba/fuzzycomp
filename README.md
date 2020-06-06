@@ -1,3 +1,3 @@
-# fuzzycomp
+# Fuzzy Comp
 
-Comparison with margis
+Comparison with margins.
