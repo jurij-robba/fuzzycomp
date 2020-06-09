@@ -8,8 +8,11 @@
 ///     println!("Precision engineering!");
 /// }
 /// ```
-pub fn eq(lh: f64, rh: f64, margin: f64) -> bool {
-    (lh + margin >= rh) & (lh - margin <= rh)
+pub fn eq<T>(lh: T, rh: T, margin: T) -> bool
+where
+    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+{
+    (rh <= (lh + margin)) & (rh >= (lh - margin))
 }
 
 /// Not equal within margin (unequal enough)
@@ -22,7 +25,10 @@ pub fn eq(lh: f64, rh: f64, margin: f64) -> bool {
 ///     println!("We need better approximation!");
 /// }
 /// ```
-pub fn ne(lh: f64, rh: f64, margin: f64) -> bool {
+pub fn ne<T>(lh: T, rh: T, margin: T) -> bool
+where
+    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+{
     (lh + margin < rh) | (lh - margin > rh)
 }
 
@@ -36,8 +42,11 @@ pub fn ne(lh: f64, rh: f64, margin: f64) -> bool {
 ///     println!("π is more than 3!");
 /// }
 /// ```
-pub fn gt(lh: f64, rh: f64, margin: f64) -> bool {
-    lh > rh + margin
+pub fn gt<T>(lh: T, rh: T, margin: T) -> bool
+where
+    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+{
+    lh > (rh + margin)
 }
 
 /// Surely less (less enough)
@@ -50,8 +59,11 @@ pub fn gt(lh: f64, rh: f64, margin: f64) -> bool {
 ///     println!("π is a lot less than 3!");
 /// }
 /// ```
-pub fn lt(lh: f64, rh: f64, margin: f64) -> bool {
-    lh < rh - margin
+pub fn lt<T>(lh: T, rh: T, margin: T) -> bool
+where
+    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+{
+    lh < (rh - margin)
 }
 
 /// Not surely smaller (at least equal)
@@ -64,8 +76,11 @@ pub fn lt(lh: f64, rh: f64, margin: f64) -> bool {
 ///     println!("1.0 is a at least 0, give or take!");
 /// }
 /// ```
-pub fn ge(lh: f64, rh: f64, margin: f64) -> bool {
-    lh >= rh - margin
+pub fn ge<T>(lh: T, rh: T, margin: T) -> bool
+where
+    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+{
+    lh >= (rh - margin)
 }
 
 /// Not surely larger (at most equal)
@@ -78,8 +93,11 @@ pub fn ge(lh: f64, rh: f64, margin: f64) -> bool {
 ///     println!("0 is not even 1!");
 /// }
 /// ```
-pub fn le(lh: f64, rh: f64, margin: f64) -> bool {
-    lh <= rh + margin
+pub fn le<T>(lh: T, rh: T, margin: T) -> bool
+where
+    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+{
+    lh <= (rh + margin)
 }
 
 #[cfg(test)]
@@ -93,6 +111,7 @@ mod tests {
         assert!(super::eq(-0.1, -0.3, 0.2));
         assert!(super::eq(-0.1, 0.1, 0.2));
         assert!(!super::eq(0.1, 0.2, 0.01));
+        assert!(super::eq(1, 1, 0));
     }
 
     #[test]
@@ -102,6 +121,7 @@ mod tests {
         assert!(!super::ne(-0.1, -0.3, 0.2));
         assert!(!super::ne(-0.1, 0.1, 0.2));
         assert!(super::ne(0.1, 0.2, 0.01));
+        assert!(super::ne(1, 3, 1));
     }
 
     #[test]
@@ -109,6 +129,7 @@ mod tests {
         assert!(super::gt(8.1, 8.0, 0.0));
         assert!(super::gt(8.1, 8.0, 0.05));
         assert!(!super::gt(8.1, 8.0, 0.1));
+        assert!(super::gt(10, 8, 1));
     }
 
     #[test]
@@ -116,6 +137,7 @@ mod tests {
         assert!(super::lt(8.0, 8.1, 0.0));
         assert!(super::lt(8.0, 8.1, 0.05));
         assert!(!super::lt(8.0, 8.1, 0.1));
+        assert!(super::lt(8, 10, 1));
     }
 
     #[test]
@@ -125,6 +147,7 @@ mod tests {
         assert!(super::ge(8.1, 8.0, 0.1));
         assert!(super::ge(8.0, 8.1, 0.1));
         assert!(!super::ge(7.9, 8.1, 0.1));
+        assert!(super::ge(8, 7, 1));
     }
 
     #[test]
@@ -134,5 +157,6 @@ mod tests {
         assert!(super::le(8.0, 8.1, 0.1));
         assert!(super::le(8.1, 8.0, 0.1));
         assert!(!super::le(8.2, 8.0, 0.1));
+        assert!(super::le(8, 8, 1));
     }
 }

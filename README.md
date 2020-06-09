@@ -2,6 +2,20 @@
 
 Comparison with margins.
 
+## Justification
+
+There are problems in engineering and elsewhere where similar enough numbers
+count as equal. Take for example cruise control. We do not want to regulate
+speed for every small change but when the speed deviates enough from desired we
+either break or speed up.
+
+Similarly, in finance, a candlestick that has the same open and close price is
+called doji and signifies indecision in markets. Of course open and close need
+only be close enough in real-world say 1/10 or less of the daily range.
+
+Those are the sort of the problem the comparison functions in this library aim
+to solve.
+
 ## Description
 
 Notation follows Fortran's functions:
