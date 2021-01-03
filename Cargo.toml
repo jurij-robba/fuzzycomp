@@ -1,6 +1,6 @@
 [package]
 name = "fuzzycomp"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Jurij Robba <jurij.robba@vernocte.org>"]
 edition = "2018"
 license = "MIT"
@@ -13,4 +13,4 @@ readme = "README.md"
 
 [dependencies]
 
-# None
+assert_approx_eq = "1.1"
