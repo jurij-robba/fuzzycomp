@@ -10,9 +10,9 @@
 /// ```
 pub fn eq<T>(lhs: T, rhs: T, margin: T) -> bool
 where
-    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+    T: PartialOrd + std::ops::Add<Output = T> + Copy,
 {
-    (rhs <= (lhs + margin)) & (rhs >= (lhs - margin))
+    (rhs <= lhs + margin) & (rhs + margin >= lhs)
 }
 
 /// Not equal within margin (unequal enough)
@@ -27,9 +27,9 @@ where
 /// ```
 pub fn ne<T>(lhs: T, rhs: T, margin: T) -> bool
 where
-    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+    T: PartialOrd + std::ops::Add<Output = T> + Copy,
 {
-    (lhs + margin < rhs) | (lhs - margin > rhs)
+    (lhs + margin < rhs) | (lhs > rhs + margin)
 }
 
 /// Surely greater (greater enough)
@@ -44,7 +44,7 @@ where
 /// ```
 pub fn gt<T>(lhs: T, rhs: T, margin: T) -> bool
 where
-    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+    T: PartialOrd + std::ops::Add<Output = T> + Copy,
 {
     lhs > (rhs + margin)
 }
@@ -61,9 +61,9 @@ where
 /// ```
 pub fn lt<T>(lhs: T, rhs: T, margin: T) -> bool
 where
-    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+    T: PartialOrd + std::ops::Add<Output = T>,
 {
-    lhs < (rhs - margin)
+    lhs + margin < rhs
 }
 
 /// Not surely smaller (at least equal)
@@ -78,9 +78,9 @@ where
 /// ```
 pub fn ge<T>(lhs: T, rhs: T, margin: T) -> bool
 where
-    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+    T: PartialOrd + std::ops::Add<Output = T>,
 {
-    lhs >= (rhs - margin)
+    lhs + margin >= rhs
 }
 
 /// Not surely larger (at most equal)
@@ -95,9 +95,9 @@ where
 /// ```
 pub fn le<T>(lhs: T, rhs: T, margin: T) -> bool
 where
-    T: PartialOrd + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + Copy,
+    T: PartialOrd + std::ops::Add<Output = T>,
 {
-    lhs <= (rhs + margin)
+    lhs <= rhs + margin
 }
 
 #[cfg(test)]
